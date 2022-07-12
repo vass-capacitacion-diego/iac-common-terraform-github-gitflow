@@ -14,10 +14,12 @@ resource "github_team_members" "some_team_members" {
   }
 
 }
-
+*/
+data "github_team" "team" {
+  slug = var.team
+}
 resource "github_team_repository" "team_iac" {
-  team_id    = github_team.team.id
-  repository = github_repository.repositorios.name
+  team_id    = data.github_team.team.id
+  repository = github_repository.repositorios[0].name
   permission = "maintain"
 }
-*/
